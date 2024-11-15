@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delegram's Thought Exchange</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+        header, .section {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 10px 0;
+            background: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        header {
+            text-align: center;
+        }
+        .cta {
+            margin: 20px 0;
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .prompt {
+            font-size: 18px;
+            color: #666;
+            margin: 20px 0;
+        }
+        #thought-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .btn-submit {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .admin-only {
+            display: none;
+        }
+        footer {
+            margin: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logo/Banner Section -->
+<header>
+    <img id="logo" src="your-logo-url.png" alt="Delegram's Logo" width="150">
+    <h1>Delegram's Thought Exchange</h1>
+    <a href="https://your-social-media-link" class="cta">Connect with us on Social Media</a>
+</header>
+
+<!-- Thought Exchange Section -->
+<section class="section">
+    <h2 class="section-title">Enter Your Thought</h2>
+    <p class="prompt" id="daily-prompt">Today's Prompt: "What’s the strangest thought you've had recently?"</p>
+    <textarea id="thought-input" rows="4" placeholder="Type your thought here..."></textarea>
+    <button class="btn-submit" onclick="submitThought()">Submit</button>
+</section>
+
+<!-- Admin-Only Blog Section -->
+<section class="section admin-only" id="admin-blog">
+    <h2 class="section-title">Admin Blog</h2>
+    <p>This section is accessible only to you, the website administrator.</p>
+    <!-- Admin blog content can go here -->
+</section>
+
+<footer>
+    &copy; 2024 Delegram's Thought Exchange
+</footer>
+
+<script>
+    // Function to submit user thoughts (simulated)
+    function submitThought() {
+        const thought = document.getElementById('thought-input').value;
+        if (thought.trim()) {
+            alert("Thank you for sharing your thought!");
+            document.getElementById('thought-input').value = ""; // clear the input
+        } else {
+            alert("Please enter a thought before submitting.");
+        }
+    }
+
+    // Function to display the admin-only section (for demo purposes)
+    function showAdminSection() {
+        document.getElementById('admin-blog').style.display = 'block';
+    }
+
+    // Update Daily Prompt (example)
+    const prompts = [
+        "What’s the strangest thought you've had recently?",
+        "If you could share one secret anonymously, what would it be?",
+        "What's something you've always wanted to say, but never did?",
+        "What’s an embarrassing memory that still haunts you?",
+        "What’s a thought that you think only you have?"
+    ];
+
+    function updatePrompt() {
+        const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+        document.getElementById('daily-prompt').innerText = "Today's Prompt: " + randomPrompt;
+    }
+
+    // Update the prompt daily
+    updatePrompt();
+
+    // Logo Upload Integration (simulated)
+    const logoInput = document.createElement('input');
+    logoInput.type = 'file';
+    logoInput.accept = 'image/*';
+    logoInput.onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('logo').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    // Function to prompt for logo upload
+    function uploadLogo() {
+        logoInput.click();
+    }
+
+    // Allow clicking on the logo to upload
+    document.getElementById('logo').addEventListener('click', uploadLogo);
+
+</script>
+</body>
+</html>
